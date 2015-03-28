@@ -1,0 +1,64 @@
+{
+  "name" : "mcms-node-admin",
+  "package" : "mcms-node-admin",
+  "baseFolder" : "packages/mcms-node-admin",
+  "modules" : [
+    "shared.components",
+    "mcms-admininstrator",
+    "mcms-node-admin"
+  ],
+  "devFiles" : {
+    "js" : [
+      "js/App/Services/utilities.js",
+      "js/App/app.js",
+      "js/App/Modules/sharedComponents.module.js",
+      "js/App/Modules/mcms-admin.module.js",
+      "js/App/Modules/administrator.module.js",
+      "js/App/Directives/toMoment.directive.js",
+      "js/App/Directives/panel.directive.js",
+      "js/App/Directives/checklistModel.directive.js",
+      "js/App/Directives/recursiveSelect.directive.js",
+      "js/App/Directives/file-explorer.directive.js",
+      "js/App/Directives/toSlug.directive.js",
+      "js/App/Directives/paginator.directive.js",
+      "js/App/Filters/slugify.filter.js"
+    ],
+    "css" : [
+      "app.css"
+    ]
+  },
+  "files" : {
+    "js" : [
+      "js/min/app.min.js"
+    ],
+    "css" : []
+  },
+  "menus" : [
+    {
+      "title" : "Administrator",
+      "href" : "",
+      "items" : [
+        {
+          "title" : "Settings",
+          "href" : "admin/settings"
+        },
+        {
+          "title" : "Users",
+          "href" : "admin/users"
+        },
+        {
+          "title" : "Menus",
+          "href" : "admin/menus"
+        },
+        {
+          "title" : "Translations",
+          "href" : "admin/translations"
+        },
+        {
+          "title" : "Settings manager",
+          "href" : "admin/settingsManager"
+        }
+      ]
+    }
+  ]
+}

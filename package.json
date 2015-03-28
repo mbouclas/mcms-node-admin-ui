@@ -1,0 +1,22 @@
+{
+  "name": "mcms-node-admin-ui",
+  "version": "0.0.1",
+  "description": "UI for the mcms-node-amdin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbouclas/mcms-node-admin-ui"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Michael Bouclas",
+    "email": "mbouclas@gmail.com",
+    "url": "http://www.net-tomorrow.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/mbouclas/mcms-node-admin-ui/issues"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {}
+}

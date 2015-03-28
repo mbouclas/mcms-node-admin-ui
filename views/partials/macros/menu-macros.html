@@ -1,0 +1,16 @@
+{% macro menu_links(links) %}
+{% for link in links %}
+<li>
+    <a href="#/{{ link.href }}" {% if link.items %}class="dropdown-toggle"
+       data-close-others="true" data-hover="dropdown" data-toggle="dropdown"{% endif %}>{{ link.title }}
+        {% if link.items %} <i class="fa fa-angle-down"></i>{% endif %}</a>
+
+    {% if link.items %}
+
+    <ul class="dropdown-menu">
+        {{ menu_links(link.items) }}
+    </ul>
+    {% endif %}
+</li>
+{% endfor %}
+{% endmacro %}

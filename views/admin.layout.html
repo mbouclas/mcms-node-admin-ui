@@ -1,0 +1,113 @@
+<!doctype html>
+<html ng-app="mcms">
+<head>
+    <link rel="stylesheet" href="/packages/mcms-node-admin/css/min/styles.min.css">
+    <title>{% block title %}Mcms Admin{% endblock %}</title>
+    {% for module in adminModules %}
+    {% for file in module[loadFilesFrom].css %}
+    <link rel="stylesheet" href="{{ file }}">
+    {% endfor %}
+    {% endfor %}
+
+</head>
+<body ng-controller="mainCtrl as main" class="page-full-width">
+<div id="wrapper">
+
+
+    {% include 'partials/admin/navBar.html' %}
+
+
+    <div class="main-container">
+        <!-- start: PAGE -->
+        <div class="main-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12" ng-controller="pageHeaderCtrl as pageHeader">
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="clip-home-3"></i>
+                                <a href="#/">
+                                    Home
+                                </a>
+                            </li>
+                            {% raw %}
+                            <li ng-if="pageHeader.path" ng-repeat="path in pageHeader.path">
+                                <a href="#/{{ path.href }}" ng-bind="path.title"></a>
+                            </li>
+                            {% endraw %}
+                            <li class="active" ng-bind-html="pageHeader.pageTitle"></li>
+                            <li class="search-box">
+                                <form class="sidebar-search">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Start Searching...">
+                                        <button class="submit">
+                                            <i class="clip-search-3"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ol>
+                        <div class="page-header">
+                            <h1 ng-bind-html="pageHeader.pageTitle"></h1>
+                        </div>
+
+
+                    </div><!-- END Col -->
+                </div><!-- END ROW -->
+                <div class="row">
+                    <div ng-view></div>
+                    {% block content %}{% endblock %}
+                </div><!-- END COL -->
+            </div><!-- END ROW -->
+        </div><!-- END MAIN CONTENT -->
+    </div><!-- END MAIN CONTAINER -->
+
+
+
+    <div class="container">
+
+    </div>
+    <div class="container-fluid">
+        <div id="loading" ng-if="loading">
+            <img src="/packages/mcms-node-admin/img/ajax-loader.gif">
+        </div>
+
+
+    </div>
+
+
+<footer>
+    <div class="container" style="min-height: 200px;">
+
+    </div>
+</footer>
+<div control-bs-modal="loginModal" class="modal largeModal">
+    <div login-box></div>
+</div>
+
+
+<div id="footer">
+    <div class="col-md-12">
+        <p>
+            &copy; Net-Tomorrow 2001
+        </p>
+        <span class="company_logo"><a href="http://www.net-tomorrow.com"></a></span>
+    </div>
+</div>
+
+</div>
+<script src="/packages/mcms-node-admin/js/min/libs.min.js"></script>
+
+<script>
+    var adminModules = angular.fromJson({{ adminModulesJson }});
+    var CSRF = '{{ CSRF }}';
+</script>
+
+{% for module in adminModules %}
+{% for file in module[loadFilesFrom].js %}
+<script src="/{{module.baseFolder}}/{{ file }}"></script>
+{% endfor %}
+{% endfor %}
+
+</body>
+</html>
