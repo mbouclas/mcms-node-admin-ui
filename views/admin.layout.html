@@ -1,14 +1,18 @@
 <!doctype html>
 <html ng-app="mcms">
 <head>
-    <link rel="stylesheet" href="/packages/mcms-node-admin/css/min/styles.min.css">
     <title>{% block title %}Mcms Admin{% endblock %}</title>
-    {% for module in adminModules %}
-    {% for file in module[loadFilesFrom].css %}
-    <link rel="stylesheet" href="{{ file }}">
-    {% endfor %}
-    {% endfor %}
+    <!-- build:css /assets/build/styles/lib.css -->
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.min.css"/>
 
+    <!-- endbuild -->
+    <!-- build:css /assets/build/styles/app.css -->
+    <link rel="stylesheet" href="/assets/css/fonts/style.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/main-responsive.css"/>
+    <link rel="stylesheet" href="/assets/css/theme_light.css"/>
+    <!-- endbuild -->
 </head>
 <body ng-controller="mainCtrl as main" class="page-full-width">
 <div id="wrapper">
@@ -22,37 +26,7 @@
         <div class="main-content">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12" ng-controller="pageHeaderCtrl as pageHeader">
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="clip-home-3"></i>
-                                <a href="#/">
-                                    Home
-                                </a>
-                            </li>
-                            {% raw %}
-                            <li ng-if="pageHeader.path" ng-repeat="path in pageHeader.path">
-                                <a href="#/{{ path.href }}" ng-bind="path.title"></a>
-                            </li>
-                            {% endraw %}
-                            <li class="active" ng-bind-html="pageHeader.pageTitle"></li>
-                            <li class="search-box">
-                                <form class="sidebar-search">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Start Searching...">
-                                        <button class="submit">
-                                            <i class="clip-search-3"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </li>
-                        </ol>
-                        <div class="page-header">
-                            <h1 ng-bind-html="pageHeader.pageTitle"></h1>
-                        </div>
-
-
-                    </div><!-- END Col -->
+                    <ng-include src="'/app/components/pageHeader.component.html'"></ng-include>
                 </div><!-- END ROW -->
                 <div class="row">
                     <div ng-view></div>
@@ -62,19 +36,12 @@
         </div><!-- END MAIN CONTENT -->
     </div><!-- END MAIN CONTAINER -->
 
-
-
-    <div class="container">
-
-    </div>
+    <div class="container"></div>
     <div class="container-fluid">
         <div id="loading" ng-if="loading">
-            <img src="/packages/mcms-node-admin/img/ajax-loader.gif">
+            <img src="/assets/img/ajax-loader.gif">
         </div>
-
-
     </div>
-
 
 <footer>
     <div class="container" style="min-height: 200px;">
@@ -96,12 +63,31 @@
 </div>
 
 </div>
-<script src="/packages/mcms-node-admin/js/min/libs.min.js"></script>
 
+<!-- build:js /assets/build/js/lib.js -->
+<script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/assets/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script src="/assets/bower_components/angular/angular.min.js"></script>
+<script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="/assets/bower_components/angular-route/angular-route.min.js"></script>
+<!-- endbuild -->
 <script>
     var adminModules = angular.fromJson({{ adminModulesJson }});
     var CSRF = '{{ CSRF }}';
 </script>
+<!-- build:js /assets/build/js/app.js-->
+<script src="/app/app.module.js"></script>
+
+<script src="/app/core/core.module.js"></script>
+<script src="/app/core/config.js"></script>
+<script src="/app/core/main.controller.js"></script>
+
+<script src="/app/dashboard/dashboard.module.js"></script>
+<script src="/app/dashboard/dashboard.controller.js"></script>
+
+<script src="/app/components/pageHeader.controller.js"></script>
+<!-- endbuild -->
 
 {% for module in adminModules %}
 {% for file in module[loadFilesFrom].js %}
