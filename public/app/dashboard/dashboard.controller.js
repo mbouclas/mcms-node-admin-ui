@@ -2,13 +2,17 @@
     angular.module('mcms')
         .controller('dashboardCtrl',dashboardCtrl);
 
-    dashboardCtrl.$inject = ['$rootScope'];
+    dashboardCtrl.$inject = ['$rootScope','logger','momentFactory'];
 
-    function dashboardCtrl($rootScope){
+    function dashboardCtrl($rootScope,logger,moment){
         var vm = this;
+
         $rootScope.pageHeader = {
             pageTitle : 'Dashboard'
         };
-        console.log('in dash')
+
+        logger.info(moment().format());
     }
+
+
 })();

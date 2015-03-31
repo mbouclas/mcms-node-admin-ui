@@ -71,7 +71,10 @@
 <script src="/public/assets/bower_components/angular/angular.min.js"></script>
 <script src="/public/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="/public/assets/bower_components/angular-route/angular-route.min.js"></script>
+<script src="/public/assets/bower_components/lodash/lodash.min.js"></script>
+<script src="/public/assets/bower_components/moment/min/moment.min.js"></script>
 <!-- endbuild -->
+
 <script>
     var adminModules = angular.fromJson({{ adminModulesJson }});
     var CSRF = '{{ CSRF }}';
@@ -81,6 +84,8 @@
 
 <script src="/public/app/core/core.module.js"></script>
 <script src="/public/app/core/config.js"></script>
+<script src="/public/app/core/logger.js"></script>
+<script src="/public/app/core/core-services.js"></script>
 <script src="/public/app/core/main.controller.js"></script>
 
 <script src="/public/app/dashboard/dashboard.module.js"></script>
