@@ -26,7 +26,7 @@
         <div class="main-content">
             <div class="container">
                 <div class="row">
-                    <ng-include src="'/app/components/pageHeader.component.html'"></ng-include>
+                    <ng-include src="'/app/components/pageHeader.component.html'" ng-controller="PageHeaderController as pageHeader"></ng-include>
                 </div><!-- END ROW -->
                 <div class="row">
                     <div ng-view></div>
@@ -92,11 +92,17 @@
 <script src="/public/app/dashboard/dashboard.controller.js"></script>
 
 <script src="/public/app/components/pageHeader.controller.js"></script>
+
+<script src="/public/app/users/users.module.js"></script>
+<script src="/public/app/users/user-list.controller.js"></script>
+<script src="/public/app/users/user.controller.js"></script>
 <!-- endbuild -->
 
+ut
 {% for module in adminModules %}
 {% for file in module[loadFilesFrom].js %}
-<script src="/{{module.baseFolder}}/{{ file }}"></script>
+<script src="{{ module.baseFolder }}{{ file }}"></script>
+{% include file %}
 {% endfor %}
 {% endfor %}
 

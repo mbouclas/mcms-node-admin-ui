@@ -13,7 +13,8 @@
       'ngRoute',
       'ngSanitize',
       'mcms.core',
-      'mcms.dashboard'
+      'mcms.dashboard',
+      'mcms.users'
   ];
   angularModules = angular.extend(angularModules,extraModules);
 
