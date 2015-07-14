@@ -14,6 +14,7 @@
       'ngSanitize',
       'ngMessages',
       'formly',
+      'ngFileUpload',
       'formlyBootstrap',
       'angular-redactor',
       'mcms.namedRoutes',

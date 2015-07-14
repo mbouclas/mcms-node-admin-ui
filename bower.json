@@ -21,6 +21,7 @@
     "angular-formly": "~6.17.0",
     "angular-formly-templates-bootstrap": "~4.4.1",
     "angular-redactor": "~1.1.5",
-    "slug": "~0.9.1"
+    "slug": "~0.9.1",
+    "ng-file-upload": "~5.0.9"
   }
 }
