@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/public/assets/css/main.css"/>
     <link rel="stylesheet" href="/public/assets/css/main-responsive.css"/>
     <link rel="stylesheet" href="/public/assets/css/theme_light.css"/>
+    <link rel="stylesheet" href="/public/assets/redactor/redactor.css"/>
     <!-- endbuild -->
 </head>
 <body ng-controller="mainCtrl as main" class="page-full-width">
@@ -26,10 +27,10 @@
         <div class="main-content">
             <div class="container">
                 <div class="row">
-                    <ng-include src="'/app/components/pageHeader.component.html'" ng-controller="PageHeaderController as pageHeader"></ng-include>
+                    <ng-include src="'/admin.app/components/pageHeader.component.html'" ng-controller="PageHeaderController as pageHeader"></ng-include>
                 </div><!-- END ROW -->
                 <div class="row">
-                    <div ng-view></div>
+                    <div ng-view class="container"></div>
                     {% block content %}{% endblock %}
                 </div><!-- END COL -->
             </div><!-- END ROW -->
@@ -67,42 +68,59 @@
 <!-- build:js /assets/build/js/lib.js -->
 <script src="/public/assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/public/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/public/assets/bower_components/slug/slug.js"></script>
+<script src="/public/assets/build/js/redactor.build.js"></script>
 <script src="/public/assets/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script src="/public/assets/bower_components/api-check/dist/api-check.min.js"></script>
 <script src="/public/assets/bower_components/angular/angular.min.js"></script>
+<script src="/public/assets/bower_components/angular-formly/dist/formly.min.js"></script>
+<script src="/public/assets/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.min.js"></script>
+<script src="/public/assets/bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="/public/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="/public/assets/bower_components/angular-redactor/angular-redactor.js"></script>
 <script src="/public/assets/bower_components/angular-route/angular-route.min.js"></script>
 <script src="/public/assets/bower_components/lodash/lodash.min.js"></script>
 <script src="/public/assets/bower_components/moment/min/moment.min.js"></script>
 <!-- endbuild -->
 
 <script>
-    var adminModules = angular.fromJson({{ adminModulesJson }});
+    var adminModules = angular.fromJson({{ adminModulesJson|safe }});
     var CSRF = '{{ CSRF }}';
 </script>
 <!-- build:js /assets/build/js/app.js-->
-<script src="/public/app/app.module.js"></script>
+<script src="/public/admin.app/core/named-routes.js"></script>
+<script src="/public/admin.app/admin.module.js"></script>
 
-<script src="/public/app/core/core.module.js"></script>
-<script src="/public/app/core/config.js"></script>
-<script src="/public/app/core/logger.js"></script>
-<script src="/public/app/core/core-services.js"></script>
-<script src="/public/app/core/main.controller.js"></script>
+<script src="/public/admin.app/core/core.module.js"></script>
+<script src="/public/admin.app/core/config.js"></script>
+<script src="/public/admin.app/core/logger.js"></script>
+<script src="/public/admin.app/core/core-services.js"></script>
+<script src="/public/admin.app/core/main.controller.js"></script>
+<script src="/public/admin.app/core/dataService.js"></script>
+<script src="/public/admin.app/core/core.filters.js"></script>
 
-<script src="/public/app/dashboard/dashboard.module.js"></script>
-<script src="/public/app/dashboard/dashboard.controller.js"></script>
 
-<script src="/public/app/components/pageHeader.controller.js"></script>
+<script src="/public/admin.app/components/recursiveSelect.directive.js"></script>
+<script src="/public/admin.app/components/toSlug.directive.js"></script>
+<script src="/public/admin.app/components/compareTo.directive.js"></script>
+<script src="/public/admin.app/components/alertMessage.directive.js"></script>
+<script src="/public/admin.app/components/selectBox.directive.js"></script>
 
-<script src="/public/app/users/users.module.js"></script>
-<script src="/public/app/users/user-list.controller.js"></script>
-<script src="/public/app/users/user.controller.js"></script>
+<script src="/public/admin.app/dashboard/dashboard.module.js"></script>
+<script src="/public/admin.app/dashboard/dashboard.controller.js"></script>
+
+<script src="/public/admin.app/components/pageHeader.controller.js"></script>
+
+<script src="/public/admin.app/users/users.module.js"></script>
+<script src="/public/admin.app/users/user-list.controller.js"></script>
+<script src="/public/admin.app/users/user.controller.js"></script>
 <!-- endbuild -->
 
-ut
+
+
 {% for module in adminModules %}
 {% for file in module[loadFilesFrom].js %}
 <script src="{{ module.baseFolder }}{{ file }}"></script>
-{% include file %}
 {% endfor %}
 {% endfor %}
 

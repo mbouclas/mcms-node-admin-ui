@@ -12,23 +12,35 @@
   var angularModules = [
       'ngRoute',
       'ngSanitize',
+      'ngMessages',
+      'formly',
+      'formlyBootstrap',
+      'angular-redactor',
+      'mcms.namedRoutes',
       'mcms.core',
       'mcms.dashboard',
       'mcms.users'
   ];
-  angularModules = angular.extend(angularModules,extraModules);
+
+
+  angularModules = angularModules.concat(extraModules);
 
   angular.module('mcms', angularModules)
       .config(mcmsAdministratorConfig);
 
-    mcmsAdministratorConfig.$inject = ['$routeProvider','configuration'];
+    mcmsAdministratorConfig.$inject = ['$routeProvider','configuration','$locationProvider','redactorOptions'];
 
-    function mcmsAdministratorConfig($routeProvider,configuration) {
+    function mcmsAdministratorConfig($routeProvider,configuration,$locationProvider,redactorOptions) {
+        configuration.CSRF = CSRF || '';
+        //redactorOptions.buttons = ['formatting', '|', 'bold', 'italic'];
+        $locationProvider
+            .html5Mode(false);
         $routeProvider
             .when('/', {
                 templateUrl: configuration.appUrl + 'dashboard/dashboard.html',
                 controller: 'dashboardCtrl',
-                controllerAs: 'Dashboard'
+                controllerAs: 'Dashboard',
+                name : 'app-home'
             })
             .otherwise('/');
     }

@@ -7,6 +7,7 @@
     function userCtrl(pageTitle,$routeParams){
         var vm = this;
 
+
         pageTitle.set({
             pageTitle : 'User ' + $routeParams.id,
             path : [

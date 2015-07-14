@@ -4,6 +4,7 @@
     angular.module('mcms.core')
         .factory('lodashFactory',lodashFactory)
         .factory('momentFactory',momentFactory)
+        .factory('slugFactory',slugFactory)
         .factory('pageTitle',pageTitle)
         .factory('queryString',QS);
 
@@ -16,6 +17,10 @@
 
     function momentFactory(){
         return window.moment;
+    }
+
+    function slugFactory(){
+        return window.slug;
     }
 
     function pageTitle($rootScope,$timeout){

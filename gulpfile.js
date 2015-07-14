@@ -51,6 +51,20 @@ gulp.task('templatecache', ['clean-code'], function() {
         .pipe(gulp.dest(config.temp));
 });
 
+gulp.task('redactor',function(){
+    var files = [
+        config.assetsDir + 'redactor/redactor.min.js',
+        config.assetsDir + 'redactor/plugins/*.js'
+    ];
+
+    return gulp
+        .src(files)
+        .pipe($.plumber())
+        .pipe($.concat('redactor.build.js'))
+        .pipe($.uglify())
+        .pipe(gulp.dest(config.assetsDir + 'build/js'));
+});
+
 gulp.task('wiredep', function() {
     log('Wire up the bower css js and our app js into the html');
     var options = config.getWiredepDefaultOptions();
@@ -97,7 +111,7 @@ gulp.task('clean-styles', function(done) {
     clean(config.temp + '**/*.css', done);
 });
 
-gulp.task('optimize', ['inject'], function() {
+gulp.task('optimize', ['inject','redactor'], function() {
     log('Optimizing the javascript, css, html');
 
     var assets = $.useref.assets({searchPath: './'});
@@ -144,7 +158,7 @@ gulp.task('production', ['optimize'], function() {
 
 });
 
-gulp.task('customDev',['fonts'],function(){
+gulp.task('customDev',['fonts','redactor'],function(){
     var assets = $.useref.assets({searchPath: './'});
     var templateCache = config.temp + config.templateCache.file;
     var cssFilter = $.filter('**/*.css');
