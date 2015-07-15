@@ -1,9 +1,30 @@
-watching model:
-<div class="btn btn-lg btn-primary" ngf-select ng-model="VM.files">Upload using model $watch</div>
-<div class="btn btn-lg btn-primary" ngf-select ngf-change="VM.upload($files)">Upload on file change</div>
-Drop File:
-<div ngf-drop ng-model="VM.files" class="drop-box"
-     ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-     ngf-accept="'image/*'">Drop Images</div>
+<div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles"
+     ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+     class="drop-box" ngf-multiple="{{ multiple }}" ngf-allow-dir="true"
+     ngf-accept="accept" accept="{{ acceptSelect }}"
+     ngf-drop-available="dropAvailable">
+    <div ng-hide="dropAvailable">File Drop not available</div>
+    <div>click to select</div>
+</div>
 
-Image thumbnail: <img ngf-src="VM.files[0]" ngf-default-src="/assets/img/no-image.png" ngf-accept="'image/*'">
+<div class="preview">
+<img ngf-src="files[0]" ngf-default-src="/assets/img/no-image.png" ngf-accept="accept" ng-if="imgagePreview">
+    <ul ng-show="files.length > 0" class="list-unstyled" ng-if="progressBar" >
+        <li class="sel-file" ng-repeat="f in files" ng-show="f.show">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{f.progress}}"
+                     aria-valuemin="0" aria-valuemax="100" style="width: {{f.progress}}%;">
+                    {{f.progress}}%
+                </div>
+            </div>
+
+            {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+        </li>
+        </ul>
+
+    <ul style="clear:both" ng-show="rejFiles.length > 0" class="response">
+        <li class="sel-file" ng-repeat="f in rejFiles">
+            Rejected file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+        </li>
+    </ul>
+</div>
