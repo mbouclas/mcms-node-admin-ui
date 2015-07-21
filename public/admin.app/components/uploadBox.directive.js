@@ -30,15 +30,17 @@
     function uploadBoxController($scope,Upload,Config,$timeout,lo,$rootScope){
 
         var vm = this,
-            configObj = {
+            tmpObj = {
                 headers: {
                     '_csrf': Config.CSRF
                 },
                 method: 'POST',
+                file : '',
                 fileFormDataName: 'uploadedFile',
                 fields : {}
             };//this directive expects a config object
-        configObj = lo.merge($scope.config,configObj);
+        tmpObj = lo.merge($scope.config,tmpObj);
+
 
         $scope.$watch('files', function (files) {
             $scope.formUpload = false;
@@ -70,8 +72,10 @@
         }
 
         function uploadUsingUpload(file) {
+            var configObj = lo.clone(tmpObj);
             configObj.fields._csrf = Config.CSRF;
             configObj.file = file;
+
             file.upload = Upload.upload(configObj);
 
             file.show = true;

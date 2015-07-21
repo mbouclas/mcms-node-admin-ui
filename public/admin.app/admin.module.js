@@ -17,6 +17,7 @@
       'ngFileUpload',
       'formlyBootstrap',
       'angular-redactor',
+      'ui.sortable',
       'mcms.namedRoutes',
       'mcms.core',
       'mcms.dashboard',

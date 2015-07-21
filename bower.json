@@ -22,6 +22,8 @@
     "angular-formly-templates-bootstrap": "~4.4.1",
     "angular-redactor": "~1.1.5",
     "slug": "~0.9.1",
-    "ng-file-upload": "~5.0.9"
+    "ng-file-upload": "~5.0.9",
+    "ng-sortable": "~1.2.2",
+    "angular-ui-tree": "~2.6.0"
   }
 }
