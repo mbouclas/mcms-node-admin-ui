@@ -19,6 +19,7 @@
       'angular-redactor',
       'ui.sortable',
       'mcms.namedRoutes',
+      'mcms.tabs',
       'mcms.core',
       'mcms.dashboard',
       'mcms.users'
@@ -30,11 +31,14 @@
   angular.module('mcms', angularModules)
       .config(mcmsAdministratorConfig);
 
-    mcmsAdministratorConfig.$inject = ['$routeProvider','configuration','$locationProvider','redactorOptions'];
+    mcmsAdministratorConfig.$inject = ['$routeProvider','configuration','$locationProvider','redactorOptions','tabsConfig'];
 
-    function mcmsAdministratorConfig($routeProvider,configuration,$locationProvider,redactorOptions) {
+    function mcmsAdministratorConfig($routeProvider,configuration,$locationProvider,redactorOptions,tabsConfig) {
         configuration.CSRF = CSRF || '';
         //redactorOptions.buttons = ['formatting', '|', 'bold', 'italic'];
+        //you can overwrite the tabs configuration here
+        //tabsConfig = {};
+
         $locationProvider
             .html5Mode(false);
         $routeProvider

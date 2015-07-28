@@ -17,14 +17,19 @@
         </p>
         <form class="form-login" action="{{ Route.url('AdminLogin') }}" method="post">
             <input type="hidden" name="_csrf" value="{{ CSRF }}" />
-
-            {% if errorMessage %}
-            <div class="errorHandler alert alert-danger"><i class="fa fa-remove-sign"></i> {{ errorMessage }}</div>
+            {% if flash.messageSuccess.length > 0 %}
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ flash.messageSuccess }}
+            </div>
+            {% endif %}
+            {% if flash.messageError.length > 0 %}
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ Lang.get('user.auth.' + flash.messageError) }}
+            </div>
             {% endif %}
 
-            {% if successMessage %}
-            <div class="alert alert-success">{{ successMessage }}</div>
-            {% endif %}
 
             <fieldset>
                 <div class="form-group">
