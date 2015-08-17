@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    var core = angular.module('mcms.core');
+
     var assetsUrl = '/assets/',
         appUrl = '/admin.app/',
         componentsUrl = appUrl + 'components/';
@@ -29,7 +29,9 @@
             }
         }
     };
-
-    core.value('config', config);
-    core.constant('configuration',config);
+    angular.module('mcms.core.configuration',[])
+        .constant('configuration',config)
+        .value('config',config);
+/*    core.value('config', config);
+    core.constant('configuration',config);*/
 })();

@@ -21,13 +21,13 @@
       'mcms.namedRoutes',
       'mcms.tabs',
       'mcms.core',
+      'mcms.core.configuration',
       'mcms.dashboard',
       'mcms.users'
   ];
 
 
   angularModules = angularModules.concat(extraModules);
-
   angular.module('mcms', angularModules)
       .config(mcmsAdministratorConfig);
 
@@ -38,7 +38,9 @@
         //redactorOptions.buttons = ['formatting', '|', 'bold', 'italic'];
         //you can overwrite the tabs configuration here
         //tabsConfig = {};
-
+        if (Translations){
+            configuration.Lang = angular.fromJson(Translations);
+        }
         $locationProvider
             .html5Mode(false);
         $routeProvider

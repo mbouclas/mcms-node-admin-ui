@@ -19,11 +19,9 @@
                 scope.pageParams = $location.search();
                 if (scope.pageParams[scope.id]){
                     scope.currentState = scope.pageParams[scope.id];
-                } else {
-                    scope.currentState = vm.tabs[0];
                 }
 
-                $rootScope.$broadcast('tabs.state.changed',scope.currentState,scope.id);
+
             }
         };
 
@@ -31,8 +29,25 @@
 
     function mcmsTabsController($location,$scope,$timeout,$rootScope,lo){
         var vm = this;
+        vm.id = $scope.id;
         vm.tabs = [];
-        vm.currentState = $scope.currentState;
+        vm.currentState = $scope.currentState || vm.tabs[0];
+
+        $scope.$watch('currentState',function(value){
+            if (!value){
+                return;
+            }
+
+            vm.currentState = value;
+            $rootScope.$broadcast('tabs.state.changed',value,$scope.id);
+        });
+
+        $rootScope.$on('tabs.set.state',function(event,state){
+            if (!state){
+                return;
+            }
+            vm.changeState(state);
+        });
 
         vm.addTab = function(tab){
             vm.tabs.push(tab);
@@ -49,6 +64,7 @@
         };
 
         vm.changeState = function(state){
+
             vm.currentState = state;
             $rootScope.$broadcast('tabs.state.changed',state,$scope.id);
             var newState = {};

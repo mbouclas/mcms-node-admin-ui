@@ -1,6 +1,6 @@
 {
   "name": "mcms-node-admin-ui",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "UI for the mcms-node-amdin",
   "repository": {
     "type": "git",

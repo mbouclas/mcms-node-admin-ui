@@ -1,0 +1,15 @@
+<nav class="text-center">
+    <ul class="pagination">
+        <li ng-if="VM.pagination.page == 1" class="disabled"><span aria-hidden="true">&laquo;</span></li>
+        <li ng-if="VM.pagination.page != 1"><a href="" ng-click="VM.changePage(VM.pagination.prev)">&laquo;</a></li>
+
+        <li ng-class="{active : page == VM.pagination.page}" ng-repeat="page in VM.pagination.pages">
+            <span ng-if="page == VM.pagination.page">{{ page }} <span class="sr-only">(current)</span></span>
+            <a ng-if="page != VM.pagination.page" href="" ng-click="VM.changePage(page)">{{ page }}</a>
+        </li>
+
+        <li ng-if="VM.pagination.page == pagination.total" class="disabled"><span aria-hidden="true">&raquo;</span></li>
+        <li ng-if="VM.pagination.page != pagination.total"><a href="" ng-click="VM.changePage(VM.pagination.next)">&raquo;</a></li>
+
+    </ul>
+</nav>

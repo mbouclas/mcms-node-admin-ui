@@ -18,9 +18,9 @@
                 scope.contents = element.html();
                 scope.state = attributes.state;
                 scope.currentState = mcmsTabsController.currentState;
-
-                $rootScope.$on('tabs.state.changed',function(event,state){
-                    scope.currentState = state;
+                var currentState = null;
+                $rootScope.$on('tabs.state.changed',function(event,state,id){
+                    currentState = state;
                 });
 
                 $templateRequest(Config.templates.content).then(function(html){
@@ -28,6 +28,8 @@
                     var el = $compile(element.contents())(scope);
                     $timeout(function(){
                         element.replaceWith(el);
+                        scope.currentState = currentState;
+                        $rootScope.$broadcast('tabs.content.loaded',scope.state);
                     });
 
                 });

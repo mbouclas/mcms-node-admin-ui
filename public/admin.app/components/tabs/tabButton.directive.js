@@ -19,22 +19,15 @@
                 scope.state = attributes.state;
                 scope.target = '#' + attributes.state;
                 scope.loaded = false;
-                mcmsTabsController.addTab(scope.state);
+
                 var el = '',
                     queue = null;
                 $templateRequest(Config.templates.tab).then(function(html){
+                    mcmsTabsController.addTab(scope.state);
                     element.html(html);
                     el = $compile(element.contents())(scope);
                     element.replaceWith(el);
                     scope.loaded = true;
-                });
-
-                $rootScope.$on('tabs.state.changed',function(event,state,id){
-                    if (mcmsTabsController.tabs.indexOf(scope.state) == -1){
-                        return;
-                    }
-
-                    queue = state;
                 });
 
                 scope.$watch('loaded',function(val){
@@ -42,7 +35,7 @@
                         return;
                     }
 
-                    if (scope.state == queue){
+                    if (scope.state == mcmsTabsController.currentState){
                         $timeout(function(){
                             el.find('a').trigger('click');
                         });

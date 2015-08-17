@@ -159,3 +159,12 @@ body.rtl .main-content .container {
 		background-color: #fff;
 	}
 }
+
+.orderStatus-0 { color:#f85b0f;}
+.orderStatus-1 { color:#9f491f;}
+.orderStatus-2 { color:#c9c71c;}
+.orderStatus-3 { color:#ff6600;}
+.orderStatus-4 { color:#243ade;}
+.orderStatus-5 { color:#147324;}
+.orderStatus-6 { color:#147324; text-decoration:line-through;}
+.orderStatus-8 { color:#ff2222;}

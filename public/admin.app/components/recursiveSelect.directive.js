@@ -54,24 +54,26 @@
                         };
 
                         scope.$watch("tree", function(val) {
-                            if (val){
-                                   scope.toRender = flattenTree(val);
-                                for (var i in scope.toRender){
-                                    temp[scope.toRender[i][Options.value]] = scope.toRender[i];
-                                }
-
-                                var className = (attributes.class) ? 'class="'+attributes.class+'"' : '',
-                                    emptyOption = Options.emptyOption || '',
-                                    multiple = (Options.multiple) ? 'multiple' : '';
-                                var html = '<select ng-options="option.' + Options.value +
-                                        ' as option.label for option in toRender" ' +
-                                    'ng-model="model"'+ className+ ' ' + multiple
-                                    + ' ng-change="update()" >'+emptyOption+'</select>';
-
-                                element.html(html);
-                                var el = $compile(element.contents())(scope);
-                                element.replaceWith(el);
+                            if (!val){
+                                return;
                             }
+                            scope.toRender = flattenTree(val);
+                            for (var i in scope.toRender) {
+                                temp[scope.toRender[i][Options.value]] = scope.toRender[i];
+                            }
+
+                            var className = (attributes.class) ? 'class="' + attributes.class + '"' : '',
+                                emptyOption = Options.emptyOption || '',
+                                multiple = (Options.multiple) ? 'multiple' : '';
+                            var html = '<select ng-options="option.' + Options.value +
+                                ' as option.label for option in toRender" ' +
+                                'ng-model="model"' + className + ' ' + multiple
+                                + ' ng-change="update()" >' + emptyOption + '</select>';
+
+                            element.html(html);
+                            var el = $compile(element.contents())(scope);
+                            element.replaceWith(el);
+
 
                         });
                     }
