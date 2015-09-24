@@ -1,0 +1,9 @@
+<form method="post" ng-submit="VM.saveForm()">
+    <div class="alert alert-success" ng-show="VM.success">{{ VM.successMessage || 'Saved...' }}</div>
+    {{ VM.Layout }}
+
+<div ng-repeat="row in VM.Layout">
+    <layout-editor item="row"></layout-editor>
+</div><!-- END ROW -->
+<button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
+</form>

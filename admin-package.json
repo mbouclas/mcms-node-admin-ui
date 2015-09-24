@@ -23,6 +23,10 @@
       "href" : "",
       "items" : [
         {
+          "title" : "Front page",
+          "href" : "admin/front-page"
+        },
+        {
           "title" : "Settings",
           "href" : "admin/settings"
         },

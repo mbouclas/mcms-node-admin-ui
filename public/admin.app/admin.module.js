@@ -23,7 +23,8 @@
       'mcms.core',
       'mcms.core.configuration',
       'mcms.dashboard',
-      'mcms.users'
+      'mcms.users',
+      'mcms.settings'
   ];
 
 
