@@ -3,7 +3,7 @@
         .directive('layoutEditor', layoutEditor);
 
     layoutEditor.$inject = ['$compile','configuration','$location','$rootScope','$templateRequest','$timeout'];
-    layoutEditorController.$inject = ['$location','$scope','$timeout','$rootScope','lodashFactory'];
+    layoutEditorController.$inject = ['$location','$scope','$timeout','$rootScope','lodashFactory','configuration'];
 
     function layoutEditor($compile,Config,$location,$rootScope,$templateRequest,$timeout) {
         return {
@@ -22,7 +22,7 @@
 
     }
 
-    function layoutEditorController($location,$scope,$timeout,$rootScope,lo){
+    function layoutEditorController($location,$scope,$timeout,$rootScope,lo,Config){
         var vm = this;
         vm.Item = $scope.row;
 

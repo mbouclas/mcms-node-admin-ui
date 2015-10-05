@@ -6,7 +6,8 @@
         <div class="panel-body">
             <div class="form-group">
                 <label>Image</label>
-                <file-input ng-model="item.src"></file-input>
+                <file-input ng-model="item.src" config="VM.uploadConfig"
+                            callback="VM.onUploadDone(file,response)"></file-input>
             </div>
 
             <div class="form-group">

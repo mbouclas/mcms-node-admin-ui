@@ -17,7 +17,7 @@
 
         vm.saveForm = function(){
             vm.success = true;
-            console.log(vm.Layout);
+
             DS.update(vm.Layout).then(function(result){
                 console.log(result);
             });
@@ -25,6 +25,5 @@
 
         pageTitle.set('Front Page Layout');
     }
-
 
 })();

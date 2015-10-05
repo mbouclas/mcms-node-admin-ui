@@ -66,7 +66,9 @@
                 };
 
                 scope.onUploadDone = function(file,response){
-                    console.log(file,response);
+                    scope.model = response.url;//updates the file input model
+                    scope.callback({file : file,response : response});//sends back to the main layout
+                    $rootScope.$broadcast('fileInput.upload.done',file,response);
                 };
 
                 scope.saveAndClose = function(){

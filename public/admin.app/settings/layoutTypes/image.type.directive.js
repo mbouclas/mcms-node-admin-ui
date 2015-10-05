@@ -24,6 +24,5 @@
     function imageTypeController($location,$scope,$timeout,$rootScope,lo){
         var vm = this;
         vm.Item = $scope.row;
-
     }
 })();
