@@ -1,5 +1,5 @@
 (function(){
-    angular.module('mcms')
+    angular.module('mcms.dashboard')
         .controller('dashboardCtrl',dashboardCtrl);
 
     dashboardCtrl.$inject = ['$rootScope','logger','momentFactory','pageTitle'];
