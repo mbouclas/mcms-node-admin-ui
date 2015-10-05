@@ -1,0 +1,142 @@
+<!doctype html>
+<html ng-app="mcms">
+<head>
+    <title>{% block title %}Mcms Admin{% endblock %}</title>
+    <!-- build:css /assets/build/styles/lib.css -->
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.min.css"/>
+
+    <!-- endbuild -->
+    <!-- build:css /assets/build/styles/app.css -->
+    <link rel="stylesheet" href="/assets/css/fonts/style.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/main-responsive.css"/>
+    <link rel="stylesheet" href="/assets/css/theme_light.css"/>
+    <link rel="stylesheet" href="/assets/redactor/redactor.css"/>
+    <link rel="stylesheet" href="/assets/bower_components/ng-sortable/dist/ng-sortable.css"/>
+
+
+    <!-- endbuild -->
+</head>
+<body ng-controller="mainCtrl as main" class="page-full-width">
+<div id="wrapper">
+
+
+    {% include 'partials/admin/navBar.html' %}
+
+
+    <div class="main-container">
+        <!-- start: PAGE -->
+        <div class="main-content">
+            <div class="container">
+                <div class="row">
+                    <ng-include src="'/admin.app/components/pageHeader.component.html'" ng-controller="PageHeaderController as pageHeader"></ng-include>
+                </div><!-- END ROW -->
+                <div class="row">
+                    <div ng-view class="container"></div>
+                    {% block content %}{% endblock %}
+                </div><!-- END COL -->
+            </div><!-- END ROW -->
+        </div><!-- END MAIN CONTENT -->
+    </div><!-- END MAIN CONTAINER -->
+
+    <div class="container"></div>
+    <div class="container-fluid">
+        <div id="loading" ng-if="loading">
+            <img src="/assets/img/ajax-loader.gif">
+        </div>
+    </div>
+
+<footer>
+    <div class="container" style="min-height: 200px;">
+
+    </div>
+</footer>
+<div control-bs-modal="loginModal" class="modal largeModal">
+    <div login-box></div>
+</div>
+
+
+<div id="footer">
+    <div class="col-md-12">
+        <p>
+            &copy; Net-Tomorrow 2001
+        </p>
+        <span class="company_logo"><a href="http://www.net-tomorrow.com"></a></span>
+    </div>
+</div>
+
+</div>
+
+<!-- build:js /assets/build/js/lib.js -->
+<script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/assets/bower_components/slug/slug.js"></script>
+<script src="/assets/build/js/redactor.build.js"></script>
+<script src="/assets/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script src="/assets/bower_components/api-check/dist/api-check.min.js"></script>
+<script src="/assets/bower_components/angular/angular.min.js"></script>
+<script src="/assets/bower_components/angular-formly/dist/formly.min.js"></script>
+<script src="/assets/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.min.js"></script>
+<script src="/assets/bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="/assets/bower_components/angular-redactor/angular-redactor.js"></script>
+<script src="/assets/bower_components/angular-route/angular-route.min.js"></script>
+<script src="/assets/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="/assets/bower_components/lodash/lodash.min.js"></script>
+<script src="/assets/bower_components/moment/min/moment.min.js"></script>
+<script src="/assets/bower_components/ng-sortable/dist/ng-sortable.min.js"></script>
+<!-- endbuild -->
+
+<script>
+    var adminModules = angular.fromJson({{ adminModulesJson|safe }});
+    var CSRF = '{{ CSRF }}',
+            Translations = '{{ Translations|json|safe }}';;
+</script>
+<!-- build:js /assets/build/js/app.js-->
+<script src="/admin.app/core/named-routes.js"></script>
+<script src="/admin.app/admin.module.js"></script>
+
+<script src="/admin.app/core/core.module.js"></script>
+<script src="/admin.app/core/config.js"></script>
+<script src="/admin.app/core/logger.js"></script>
+<script src="/admin.app/core/core-services.js"></script>
+<script src="/admin.app/core/main.controller.js"></script>
+<script src="/admin.app/core/dataService.js"></script>
+<script src="/admin.app/core/core.filters.js"></script>
+
+
+<script src="/admin.app/components/recursiveSelect.directive.js"></script>
+<script src="/admin.app/components/toSlug.directive.js"></script>
+<script src="/admin.app/components/compareTo.directive.js"></script>
+<script src="/admin.app/components/alertMessage.directive.js"></script>
+<script src="/admin.app/components/selectBox.directive.js"></script>
+<script src="/admin.app/components/uploadBox.directive.js"></script>
+<script src="/admin.app/components/paginate.directive.js"></script>
+<script src="/admin.app/components/tabs/mcmsTabs.module.js"></script>
+<script src="/admin.app/components/tabs/mcmsTabs.config.js"></script>
+<script src="/admin.app/components/tabs/mcmsTabs.directive.js"></script>
+<script src="/admin.app/components/tabs/tabButton.directive.js"></script>
+<script src="/admin.app/components/tabs/tabContent.directive.js"></script>
+<script src="/admin.app/components/formFilter.directive.js"></script>
+
+<script src="/admin.app/dashboard/dashboard.module.js"></script>
+<script src="/admin.app/dashboard/dashboard.controller.js"></script>
+
+<script src="/admin.app/components/pageHeader.controller.js"></script>
+
+<script src="/admin.app/users/users.module.js"></script>
+<script src="/admin.app/users/user-list.controller.js"></script>
+<script src="/admin.app/users/user.controller.js"></script>
+<!-- endbuild -->
+
+
+
+{% for module in adminModules %}
+{% for file in module[loadFilesFrom].js %}
+<script src="{{ module.baseFolder }}{{ file }}"></script>
+{% endfor %}
+{% endfor %}
+
+</body>
+</html>
