@@ -1,7 +1,6 @@
 (function(){
     'use strict';
 
-
     var assetsUrl = '/assets/',
         appUrl = '/admin.app/',
         componentsUrl = appUrl + 'components/';
