@@ -15,7 +15,10 @@
                         if (!val) {
                             return;
                         }
-                        scope.otherModelValue = slug(val,{lower: true});
+                        element.on('keydown',function(){
+                            scope.otherModelValue = slug(val,{lower: true});
+                        });
+
                     });
                 }
             };
